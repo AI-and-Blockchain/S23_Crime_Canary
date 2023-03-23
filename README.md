@@ -6,8 +6,9 @@ What is Crime Canary?
 Crime Canary is a framework that involves the Algorand block chain technology for the **incentivization** and **automation** of law enforcement reporting. Specifically, a user (civilian) can utilize the framework to report an incident, a crime, etc. to a local law enforcement via their submission of an image. Additionally, if the submission is proven to be valid, the user is then rewarded with governmental crypto-coins, which can be traded for approved services. 
 
 Hence, the overall goal is
-- To create a transparent, secure, and incentivized platform for fast and accurate road accident reporting
-- To reduce emergency response times, which will help save lives and apprehend perpetrators
+- To create an automated, transparent, and incentivized platform for fast and accurate incident reporting
+- To reduce law enforcement response times, which may help save lives, apprehend crime perpetrators, and generally improve the safety of citizens
+- To increase participation/volunteering in community monitoring through incentivization
 
 ![alt text](https://github.com/AI-and-Blockchain/S23_Crime_Canary/blob/main/images/story.png)
 
