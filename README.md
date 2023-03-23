@@ -9,7 +9,7 @@ Hence, the overall goal is
 - To create a transparent, secure, and incentivized platform for fast and accurate road accident reporting
 - To reduce emergency response times, which will help save lives and apprehend perpetrators
 
-![alt text](https://github.com/AI-and-Blockchain/S23_Crime_Canary/blob/main/story.png)
+![alt text](https://github.com/AI-and-Blockchain/S23_Crime_Canary/blob/main/images/story.png)
 
 
 This is a research project and not an official product of any governmental entities. Expect bugs and sharp edges.
