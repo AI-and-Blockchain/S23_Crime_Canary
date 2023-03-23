@@ -1,0 +1,5 @@
+pyteal==0.10.1
+pandas==1.4.0
+py-algorand-sdk==2.0.0
+flask==2.2.3
+werkzeug==2.2.3
