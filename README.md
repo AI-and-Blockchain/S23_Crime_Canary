@@ -8,8 +8,7 @@ Crime Canary is a framework that involves the Algorand block chain technology fo
 Hence, the overall goal is
 - To create an automated, transparent, and incentivized platform for fast and accurate incident reporting
 - To reduce law enforcement response times, which may help save lives, apprehend crime perpetrators, and generally improve the safety of citizens
-- To increase participation/volunteering in community monitoring through incentivization
-
+- To increase the volunteer participation of citizens in law enforcement
 ![alt text](https://github.com/AI-and-Blockchain/S23_Crime_Canary/blob/main/images/story.png)
 
 
