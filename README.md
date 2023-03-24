@@ -31,6 +31,8 @@ Creating Accounts
   python create_accounts.py
 ```
 
+![alt text](https://github.com/AI-and-Blockchain/S23_Crime_Canary/blob/main/images/components.png)
+
 ## Update (3.23.23)
 1. Initial code for web app.
     - Users can submit image and their public key
