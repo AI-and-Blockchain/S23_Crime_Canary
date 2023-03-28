@@ -30,11 +30,11 @@ class Siamese(nn.Module):
         x_support = self.layers(x_support)        
         
         similarity = (self.norm_fn(x_query - x_support) + 1e-8)[:, None]
-        digits = self.predictor(similarity)
+        logits = self.predictor(similarity)
         
         # Similarity : B x 1
         # Digits: B x D where D is out channels
-        return similarity, digits
+        return similarity, logits
         
 
 layers_example = [
