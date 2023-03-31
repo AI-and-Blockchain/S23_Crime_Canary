@@ -1,9 +1,12 @@
-import os 
-from flask import Flask, flash, request, redirect, url_for, render_template, abort
+import os
+import cv2
+import requests
+from flask import Flask, request, redirect, url_for
 from werkzeug.utils import secure_filename
 
 IMG_FOLDER = './images/'
 ALLOWED_EXTENSIONS = {'gif', 'png', 'jpg', 'jpeg'}
+IMG_HASHER = cv2.img_hash.BlockMeanHash_create()
 
 app = Flask(__name__)
 app.config['IMG_FOLDER'] = IMG_FOLDER
@@ -58,10 +61,8 @@ def upload_file():
         
         if allowed_file(FILE.filename):
             fname = secure_filename(FILE.filename)
-        
-            print(fname)
-            
             # instead of saving, we want to predict and send here
+            
 
             return redirect(url_for('submitted'))
         else:

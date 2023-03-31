@@ -3,3 +3,6 @@ pandas==1.4.0
 py-algorand-sdk==2.0.0
 flask==2.2.3
 werkzeug==2.2.3
+opencv-python==4.5.5.64
+opencv-contrib-python==4.7.0.72
+numpy>=1.19.3
