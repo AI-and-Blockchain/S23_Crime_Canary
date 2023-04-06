@@ -37,6 +37,13 @@ Creating Accounts
     - Users can submit image and their public key
 2. Code for creating accounts on Algorand
 
+## Update (4.6.23)
+1. Web app can load a model and predict an image
+    - Still need extra functionality on ensuring the size of image is correct to the model
+
+2. Web app can check if a user did put a stake on the blockchain
+
+
 ## Contributors
 Chibuikem Ezemaduka (ezemac@rpi.edu)
 
