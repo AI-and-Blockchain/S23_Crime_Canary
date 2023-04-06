@@ -30,6 +30,8 @@ Creating Accounts
   python create_accounts.py
 ```
 
+
+## Story Chart
 ![alt text](https://github.com/AI-and-Blockchain/S23_Crime_Canary/blob/main/images/components.png)
 
 ## Update (3.23.23)
