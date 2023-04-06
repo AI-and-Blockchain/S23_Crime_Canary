@@ -21,6 +21,8 @@ This is a research project and not an official product of any governmental entit
 and follow the installation of Algorand Sandbox (https://github.com/algorand/sandbox)
 
 ## Usage
+![alt text](https://github.com/AI-and-Blockchain/S23_Crime_Canary/blob/main/images/flow_chart.png)
+
 Launching Web App.
 ```
   flask --app web_app run
