@@ -34,7 +34,7 @@ Creating Accounts
 ![alt text](https://github.com/AI-and-Blockchain/S23_Crime_Canary/blob/main/images/components.png)
 
 ## Model
-
+![alt text](https://github.com/AI-and-Blockchain/S23_Crime_Canary/blob/main/images/Siamese_Model_diagram.png)
 
 ## Update (3.23.23)
 1. Initial code for web app.
