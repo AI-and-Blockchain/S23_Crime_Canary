@@ -55,15 +55,3 @@ if not(os.path.exists(c_object)):
 
     except Exception as e:
         print(e)
-
-
-
-
-
-
-
-
-
-
-
-
