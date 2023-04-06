@@ -47,7 +47,7 @@ Creating Accounts
 
 2. Web app can check if a user did put a stake on the blockchain
 
-3. Siamese Network is added along with experimental results following the work on [Extreme Learning with CNN](https://link.springer.com/article/10.1007/s11554-019-00852-3)
+3. Siamese Network is added along with experimental results following the work on [Convolution neural network joint with mixture of extreme learning machines for feature extraction and classification of accident images](https://link.springer.com/article/10.1007/s11554-019-00852-3)
 
 ## Contributors
 Chibuikem Ezemaduka (ezemac@rpi.edu)
