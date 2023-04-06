@@ -30,9 +30,11 @@ Creating Accounts
   python create_accounts.py
 ```
 
-
 ## Story Chart
 ![alt text](https://github.com/AI-and-Blockchain/S23_Crime_Canary/blob/main/images/components.png)
+
+## Model
+
 
 ## Update (3.23.23)
 1. Initial code for web app.
@@ -45,6 +47,7 @@ Creating Accounts
 
 2. Web app can check if a user did put a stake on the blockchain
 
+3. Siamese Network is added along with experimental results following the work on [Extreme Learning with CNN](https://link.springer.com/article/10.1007/s11554-019-00852-3)
 
 ## Contributors
 Chibuikem Ezemaduka (ezemac@rpi.edu)
