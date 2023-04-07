@@ -5,6 +5,33 @@ from functools import partial
 
 from typing import Tuple, Iterable
 
+
+class ChannelNorm(nn.Module):
+    """Following the work: https://arxiv.org/pdf/1607.06450.pdf
+        adapted for images
+    """
+    def __init__(self, dim: int, use_bias: bool = True):
+        super().__init__()
+        
+        self.use_bias = use_bias
+        self.g = nn.Parameter(torch.ones(dim, 1, 1))
+        
+        if self.use_bias:
+            self.b = nn.Parameter((torch.ones(dim, 1, 1)))
+        
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        """Forward Pass:
+            arg: Image (C x H x W)
+        """
+        mu = x.mean(1, keepdims=True)
+        std = (((x - mu) ** 2).mean(1, keepdims=True) + 1e-8) ** 0.5
+        
+        if self.use_bias:
+            return self.g * (x - mu) / std + self.b 
+        return self.g * (x - mu) / std
+        
+        
+
 class Siamese(nn.Module):
     def __init__(self, layers: Iterable, out_channels: int):
         super().__init__()
@@ -48,4 +75,10 @@ model = Siamese(layers_example, 10)
 image_s = torch.rand([10, 3, 28, 28])
 image_q = torch.rand([10, 3, 28, 28])
 
-print(model.forward(image_q, image_s))
+#print(model.forward(image_q, image_s))
+
+cnorm = ChannelNorm(3)
+
+print(cnorm.forward(image_s[0]))
+
+print(image_s[0])
