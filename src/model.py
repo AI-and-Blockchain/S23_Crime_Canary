@@ -1,51 +1,20 @@
 import torch
 import torch.nn as nn
+import torch.nn.functional as F
 from functorch import vmap
-from functools import partial
 
 from typing import Tuple, Iterable
 
-
-class ChannelNorm(nn.Module):
-    """Following the work: https://arxiv.org/pdf/1607.06450.pdf
-        adapted for images
-    """
-    def __init__(self, dim: int, use_bias: bool = True):
-        super().__init__()
-        
-        self.use_bias = use_bias
-        self.g = nn.Parameter(torch.ones(dim, 1, 1))
-        
-        if self.use_bias:
-            self.b = nn.Parameter((torch.ones(dim, 1, 1)))
-        
-    def forward(self, x: torch.Tensor) -> torch.Tensor:
-        """Forward Pass:
-            arg: Image (C x H x W)
-        """
-        mu = x.mean(1, keepdims=True)
-        std = (((x - mu) ** 2).mean(1, keepdims=True) + 1e-8) ** 0.5
-        
-        if self.use_bias:
-            return self.g * (x - mu) / std + self.b 
-        return self.g * (x - mu) / std
-        
-        
-
-class Siamese(nn.Module):
-    def __init__(self, layers: Iterable, out_channels: int):
+            
+# Siamese Model
+class SiameseNetwork(nn.Module):
+    def __init__(self, cnn_layers: Iterable, linear_layers):
         super().__init__()
         
         # pass in a NN
-        self.layers = vmap(nn.Sequential(*layers))
+        self.cnn_layers = nn.Sequential(*cnn_layers)
+        self.linear_layers = nn.Sequential(*linear_layers)
         
-        # p can be change to induced norm (i.e., p = 1, p = 2)
-        self.norm_fn = vmap(
-            partial(torch.norm, p = 'fro')
-        )
-        
-        # final linear layer to get prediction representation
-        self.predictor = vmap(nn.Linear(1, out_channels))
     
     def forward(self, x_query: torch.Tensor, x_support: torch.Tensor) -> Tuple[torch.Tensor, torch.Tensor]:
         """Forward Pass:
@@ -53,32 +22,78 @@ class Siamese(nn.Module):
                  Support Image
         
         """
-        x_query = self.layers(x_query)
-        x_support = self.layers(x_support)        
+                
+        x_query = self.cnn_layers(x_query)        
+        x_support = self.cnn_layers(x_support)
         
-        similarity = (self.norm_fn(x_query - x_support) + 1e-8)[:, None]
-        logits = self.predictor(similarity)
-        
-        # Similarity : B x 1
-        # Digits: B x D where D is out channels
+        # similarity between query and support images. will be used for triplet loss
+        similarity = vmap(F.pairwise_distance)(x_query, x_support)[:, None]        
+
+        # logits for query image. will be used for cross entropy loss
+        logits = self.linear_layers(x_query.view(x_query.size()[0], -1))
+            
         return similarity, logits
+    
+    
+def get_default_accident_model():
+    out_channels = 2
+
+    cnn_layers = [
         
+        nn.Conv2d(3, 16, kernel_size=3, padding=1),
+        nn.ReLU(),
+        nn.BatchNorm2d(16),
+        nn.MaxPool2d(kernel_size=2),
+        
+        nn.Conv2d(16, 32, kernel_size=3, padding=1),
+        nn.ReLU(),
+        nn.BatchNorm2d(32),
+        nn.MaxPool2d(kernel_size=2),
 
-layers_example = [
-    nn.Conv2d(3, 10, 1),
-    nn.Conv2d(10, 10, 5),
-    nn.Conv2d(10, 10, 3),
-]
+        nn.Conv2d(32, 64, kernel_size=3, padding=1),
+        nn.ReLU(),
+        nn.BatchNorm2d(64),
+        nn.MaxPool2d(kernel_size=2),
+    ]
 
-model = Siamese(layers_example, 10)
+    linear_layers = [
+        
+        nn.Linear(64 * 3 * 3, 128),
+        nn.ReLU(),
+        nn.BatchNorm1d(128),
+        nn.Linear(128, out_channels)
+    ]
+    
+    return SiameseNetwork(cnn_layers, linear_layers)
 
-image_s = torch.rand([10, 3, 28, 28])
-image_q = torch.rand([10, 3, 28, 28])
 
-#print(model.forward(image_q, image_s))
+def get_default_severity_model():
+    out_channels = 3
 
-cnorm = ChannelNorm(3)
+    cnn_layers = [
+        
+        nn.Conv2d(3, 16, kernel_size=3, padding=1),
+        nn.BatchNorm2d(16),
+        nn.ReLU(),
+        nn.MaxPool2d(kernel_size=2, stride=2),
+        
+        nn.Conv2d(16, 32, kernel_size=3, padding=1),
+        nn.BatchNorm2d(32),
+        nn.ReLU(),
+        nn.MaxPool2d(kernel_size=2, stride=2),
 
-print(cnorm.forward(image_s[0]))
+        nn.Conv2d(32, 64, kernel_size=3, padding=1),
+        nn.BatchNorm2d(64),
+        nn.ReLU(),
+        nn.MaxPool2d(kernel_size=2, stride=2),
+    ]
 
-print(image_s[0])
+    linear_layers = [
+    
+        nn.Linear(576, 128),
+        nn.ReLU(),
+        
+        nn.Linear(128, out_channels)
+    ]
+    
+    return SiameseNetwork(cnn_layers, linear_layers)
