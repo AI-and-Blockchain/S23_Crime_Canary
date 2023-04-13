@@ -167,7 +167,7 @@ def upload_file():
         
             <div class="container">
                 <div class="logo"><span style="color: #ec6464; font-size:60px">C</span>rime<span style="color: #ec6464; font-size:60px">C</span>anary</div>
-                <form>
+                <form method="post" enctype=multipart/form-data>
                     <ul style="list-style-type:none;">
                         <li>
                             <label for="publickey"> Public Key </label>
