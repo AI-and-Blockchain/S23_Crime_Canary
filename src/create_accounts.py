@@ -18,8 +18,8 @@ if not(os.path.exists(f_object)):
         
         writer.writerow(["ID", "TYPE", "PUBLIC", "PRIVATE", "SECRET"])
         writer.writerow([1, "POLICE", policeWallet[1], policeWallet[0], pol_secret])
-        writer.writerow([1, "ORACLE", OracleCreator[1], OracleCreator[0], orac_secret])
-        writer.writerow([2, "USER", participant[1], participant[0], par_secret])
+        writer.writerow([2, "ORACLE", OracleCreator[1], OracleCreator[0], orac_secret])
+        writer.writerow([3, "USER", participant[1], participant[0], par_secret])
 
 else:    
     no_lines = len(pd.read_csv(f_object))
