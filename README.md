@@ -25,7 +25,7 @@ and follow the installation of Algorand Sandbox (https://github.com/algorand/san
 
 Launching Web App.
 ```
-  flask --app web_app run
+  python web_app.py
 ```
 Creating Accounts
 ```
