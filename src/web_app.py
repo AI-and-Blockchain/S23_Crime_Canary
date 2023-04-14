@@ -39,7 +39,7 @@ def gen_response(apred: int, spred: int):
     responseA = responseB = ''
     
     if apred == 1:
-        responseA = 'an accident has occurred.'
+        responseA = 'an accident has occurred. Nothing will be done.'
         
         if spred == 0:
             responseB = 'Severity of the accident is low. You are rewarded with 1 Canary tokens.'
