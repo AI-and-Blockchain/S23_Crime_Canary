@@ -26,7 +26,7 @@ Also, follow the installation instructions of Algorand Sandbox (https://github.c
 ## Usage
 ![alt text](https://github.com/AI-and-Blockchain/S23_Crime_Canary/blob/main/images/flow_chart.png)
 
-### Launching Web App.
+### Launching the Web App
 Run the following from src to launch the web app.
 ```
   python web_app.py
