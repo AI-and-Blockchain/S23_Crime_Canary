@@ -54,6 +54,15 @@ Creating Accounts
 
 3. Siamese Network is added along with experimental results following the work on [Convolution neural network joint with mixture of extreme learning machines for feature extraction and classification of accident images](https://link.springer.com/article/10.1007/s11554-019-00852-3)
 
+## Update (4.14.23)
+1. Integrated the Oracle
+
+2. Integrated discrete codes from different components to work together
+
+3. Web app can validate and resize an image. Then it can predict if there is an accident or not, and if there is an accident, the severity of it
+
+4. 
+
 ## Contributors
 Chibuikem Ezemaduka (ezemac@rpi.edu)
 
