@@ -11,16 +11,12 @@ def decode_message(hash: str) -> str:
 def verify_transaction(img_hash: str, pkey: str, indexer: IndexerClient) -> bool:
     try:
         response = indexer.search_transactions_by_address(address=pkey, txn_type="pay", note_prefix=str.encode(img_hash))
+        txn_hash = decode_message(response['transactions'][0]['note'])
     except:
         return False 
     else:
-        response = indexer.search_transactions_by_address(address=pkey, txn_type="pay", note_prefix=str.encode(img_hash))
-
-    txn_hash = decode_message(response['transactions'][0]['note'])
-    
-    if img_hash == txn_hash:
-        return True 
-    return False
+        if img_hash == txn_hash:
+            return True 
 
 
 def get_testnet_client() -> AlgodClient:

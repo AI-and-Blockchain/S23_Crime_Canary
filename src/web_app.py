@@ -52,11 +52,60 @@ def gen_response(apred: int, spred: int):
 def bad_submission():
     return '''
             <!doctype html>
-            <style>
-                p {text-align: center;} 
-            </style>
-            <p>Invalid Image File Type.</p>
-            <center> <button onclick="history.back()">Go Back</button> <br> <center>
+            <html>
+                <head>
+                    <title>Error</title>
+                    <style>
+                        body {
+                            background-color: #f8f8f8;
+                            font-family: Arial, sans-serif;
+                        }
+                        .container {
+                            width: 60%;
+                            margin: 0 auto;
+                            margin-top: 250px;
+                            text-align: center;
+                            padding: 20px;
+                            background-color: #ffffff;
+                            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                            border-radius: 5px;
+                            border: 1px solid #e0e0e0;
+                        }
+                        p {
+                            font-size: 1.2em;
+                        }
+                        .error-icon:before {
+                            content: "\26Error !!";
+                            color: #FFA500;
+                            font-size: 1em;
+                            margin-right: 10px;
+                        }
+                        button {
+                            background-color: #4CAF50;
+                            border: none;
+                            color: #ffffff;
+                            padding: 10px 20px;
+                            text-align: center;
+                            text-decoration: none;
+                            display: inline-block;
+                            font-size: 16px;
+                            margin-top: 20px;
+                            border-radius: 5px;
+                            cursor: pointer;
+                        }
+                        button:hover {
+                            background-color: #3e8e41;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        <p><span class="error-icon"></span></p>
+                        <p>Invalid Image File Type</p>
+                        <button onclick="history.back()">Go Back</button>
+                    </div>
+                </body>
+            </html>
         '''
      
 @app.route('/invalid_submission')   
@@ -73,12 +122,65 @@ def invalid_submission():
 @app.route('/invalid_publickey')   
 def invalid_publickey():
     return '''
+         
+        
             <!doctype html>
-            <style>
-                p {text-align: center;} 
-            </style>
-            <p>You either sent an incorrect public key or you did not confirm your report.</p> <br>
-            <center> <button onclick="history.back()">Go Back</button> <center>
+            <html>
+                <head>
+                    <title>Error</title>
+                    <style>
+                        body {
+                            background-color: #f8f8f8;
+                            font-family: Arial, sans-serif;
+                        }
+                        .container {
+                            width: 60%;
+                            margin: 0 auto;
+                            margin-top: 250px;
+                            text-align: center;
+                            padding: 20px;
+                            background-color: #ffffff;
+                            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                            border-radius: 5px;
+                            border: 1px solid #e0e0e0;
+                        }
+                        p {
+                            font-size: 1.2em;
+                        }
+                        .error-icon:before {
+                            content: "\26Error !!";
+                            color: #FFA500;
+                            font-size: 1em;
+                            margin-right: 10px;
+                        }
+                        button {
+                            background-color: #4CAF50;
+                            border: none;
+                            color: #ffffff;
+                            padding: 10px 20px;
+                            text-align: center;
+                            text-decoration: none;
+                            display: inline-block;
+                            font-size: 16px;
+                            margin-top: 20px;
+                            border-radius: 5px;
+                            cursor: pointer;
+                        }
+                        button:hover {
+                            background-color: #3e8e41;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        <p><span class="error-icon"></span></p>
+                        <p>You either sent an incorrect public key or you did not confirm your report.</p>
+                        <button onclick="history.back()">Go Back</button>
+                    </div>
+                </body>
+            </html>
+
+            
         '''
         
 @app.route('/submitted/<apred>-<spred>')
@@ -86,13 +188,64 @@ def submitted(apred, spred):
     A, B = gen_response(int(apred), int(spred))
     
     html = '''\
+           
             <!doctype html>
-            <style>
-                p {text-align: center;} 
-            </style>
-            <p>Report is submitted.</p>
-            <p>Based on the submitted image, $accident $severity</p>
-            <center> <button onclick="history.back()">Go Back</button> <br> <center>
+            <html>
+                <head>
+                    <title>Error</title>
+                    <style>
+                        body {
+                            background-color: #f8f8f8;
+                            font-family: Arial, sans-serif;
+                        }
+                        .container {
+                            width: 60%;
+                            margin: 0 auto;
+                            margin-top: 250px;
+                            text-align: center;
+                            padding: 20px;
+                            background-color: #ffffff;
+                            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                            border-radius: 5px;
+                            border: 1px solid #e0e0e0;
+                        }
+                        p {
+                            font-size: 1.2em;
+                        }
+                        .success-icon:before {
+                            content: "\Sucess !!";
+                            color: green;
+                            font-size: 1em;
+                            margin-right: 10px;
+                        }
+                        button {
+                            background-color: #4CAF50;
+                            border: none;
+                            color: #ffffff;
+                            padding: 10px 20px;
+                            text-align: center;
+                            text-decoration: none;
+                            display: inline-block;
+                            font-size: 16px;
+                            margin-top: 20px;
+                            border-radius: 5px;
+                            cursor: pointer;
+                        }
+                        button:hover {
+                            background-color: #3e8e41;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        <p><span class="success-icon"></span></p>
+                        <p>Report is submitted.</p>
+                        <p>Based on the submitted image, $accident $severity</p>
+                        <center> <button onclick="history.back()">Go Back</button> <br> <center>
+                    </div>
+                </body>
+            </html>
+
         '''
     
     return Template(html).safe_substitute(accident = A, severity = B)
