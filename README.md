@@ -51,7 +51,7 @@ For example, for demo purposes, we have a quick script to perform opt-in and sta
 ```
 python opt_and_stake.py CGQY5D62KVYRDWNHSY6MVLPMA7TBAHZ6I2PSOPZB7A27GIZEJU3C2XEXQ4 9d7QxuJMq08sNMXPVXZWYM/lSElr+KGkSoEk0TOTfNERoY6P2lVxEdmnljzKrewH5hAfPkafJz8h+DXzIyRNNg== ~/Desktop/test_image.jpg
 ```
-This particular script ***opt_and_stake.py*** takes in the public key and private key of the user along with the path to an image.
+This particular script ***opt_and_stake.py*** takes in the ***public key*** and ***private key*** of the user along with the ***path to an image***.
 
 ## Sequence Diagram
 ![alt text](https://github.com/AI-and-Blockchain/S23_Crime_Canary/blob/main/images/components.png)
