@@ -6,7 +6,6 @@ werkzeug==2.2.3
 opencv-python==4.5.5.64
 opencv-contrib-python==4.7.0.72
 numpy>=1.19.3
-torchvision==0.14.1
 Pillow==9.4.0
 matplotlib==3.6.3
 matplotlib-inline==0.1.6
