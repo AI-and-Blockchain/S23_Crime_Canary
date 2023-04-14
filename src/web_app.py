@@ -9,7 +9,9 @@ from werkzeug.utils import secure_filename
 from flask import Flask, request, redirect, url_for
 from model_utils import get_models, predict, resize_image
 
-from algo_utils import verify_transaction, hash_image, get_testnet_indexer, get_testnet_client
+from algo_utils import (
+    verify_transaction, hash_image, get_testnet_indexer, get_testnet_client, get_default_wallet, make_send_transaction
+)
 
 INDEXER = get_testnet_indexer()
 CLIENT = get_testnet_client()
@@ -17,10 +19,12 @@ CLIENT = get_testnet_client()
 IMG_FOLDER = './images/'
 ALLOWED_EXTENSIONS = {'gif', 'png', 'jpg', 'jpeg'}
 
-
 app = Flask(__name__)
 app.config['IMG_FOLDER'] = IMG_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1000 * 1000
+
+DEFAULT_WALLET_PKEY, DEFAULT_WALLET_SKEY = get_default_wallet()
+DEFAULT_ASSET_ID = 176869006
 
 MODELS = get_models(['../saved_models/accident_best_model.pth', '../saved_models/severity_best_model.pth'])
 predict_fn = partial(predict, models = MODELS)
@@ -37,11 +41,11 @@ def gen_response(apred: int, spred: int):
         responseA = 'an accident has occurred.'
         
         if spred == 0:
-            responseB = 'Severity of the accident is low.'
+            responseB = 'Severity of the accident is low. You are rewarded with 1 Canary tokens.'
         elif spred == 1:
-            responseB = 'Severity of the accident is medium.'
+            responseB = 'Severity of the accident is medium. You are rewarded with 2 Canary tokens.'
         else:
-            responseB = 'Severity of the accident is high.'
+            responseB = 'Severity of the accident is high. You are rewarded with 3 Canary tokens.'
     else:
         responseA = 'an accident has not occurred.'
         
@@ -107,7 +111,69 @@ def bad_submission():
                 </body>
             </html>
         '''
-     
+        
+
+@app.route('/invalid_transaction')
+def invalid_transaction():
+        return '''
+            <!doctype html>
+            <html>
+                <head>
+                    <title>Error</title>
+                    <style>
+                        body {
+                            background-color: #f8f8f8;
+                            font-family: Arial, sans-serif;
+                        }
+                        .container {
+                            width: 60%;
+                            margin: 0 auto;
+                            margin-top: 250px;
+                            text-align: center;
+                            padding: 20px;
+                            background-color: #ffffff;
+                            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                            border-radius: 5px;
+                            border: 1px solid #e0e0e0;
+                        }
+                        p {
+                            font-size: 1.2em;
+                        }
+                        .error-icon:before {
+                            content: "\26Error !!";
+                            color: #FFA500;
+                            font-size: 1em;
+                            margin-right: 10px;
+                        }
+                        button {
+                            background-color: #4CAF50;
+                            border: none;
+                            color: #ffffff;
+                            padding: 10px 20px;
+                            text-align: center;
+                            text-decoration: none;
+                            display: inline-block;
+                            font-size: 16px;
+                            margin-top: 20px;
+                            border-radius: 5px;
+                            cursor: pointer;
+                        }
+                        button:hover {
+                            background-color: #3e8e41;
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        <p><span class="error-icon"></span></p>
+                        <p>Something went wrong with the transaction. Make sure that you had opted in.</p>
+                        <button onclick="history.back()">Go Back</button>
+                    </div>
+                </body>
+            </html>
+        '''
+        
+
 @app.route('/invalid_submission')   
 def invalid_submission():
     return '''
@@ -119,11 +185,10 @@ def invalid_submission():
             <center> <button onclick="history.back()">Go Back</button> <center>
         '''
         
+        
 @app.route('/invalid_publickey')   
 def invalid_publickey():
     return '''
-         
-        
             <!doctype html>
             <html>
                 <head>
@@ -179,8 +244,6 @@ def invalid_publickey():
                     </div>
                 </body>
             </html>
-
-            
         '''
         
 @app.route('/submitted/<apred>-<spred>')
@@ -269,8 +332,18 @@ def upload_file():
                 return redirect(url_for('invalid_publickey'))
             
             img = resize_image(image)
-            apred, spred = predict_fn(img)            
+            apred, spred = predict_fn(img)
             
+            if apred == 1:
+                tokens = spred + 1
+                
+                flag = make_send_transaction(
+                    CLIENT, DEFAULT_WALLET_PKEY, PKEY, DEFAULT_ASSET_ID, DEFAULT_WALLET_SKEY, tokens
+                )
+                
+                if not(flag):
+                    return redirect(url_for('invalid_transaction'))
+    
             return redirect(url_for('submitted', apred=apred, spred=spred))
         else:
             return redirect(url_for('bad_submission'))
