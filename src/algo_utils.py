@@ -104,7 +104,7 @@ def send_transaction(client: AlgodClient, stxn):
         return True
         
 
-def make_send_transaction(client: AlgodClient, sender: str, receiver: str, assetid: str, sender_skey: str, send_amount: int) -> bool:
+def make_send_transaction(client: AlgodClient, sender: str, receiver: str, assetid: str, sender_skey: str, send_amount: int, note: str='') -> bool:
     params = client.suggested_params()
     
     asset_tf = transaction.AssetTransferTxn(
@@ -112,7 +112,8 @@ def make_send_transaction(client: AlgodClient, sender: str, receiver: str, asset
         sp=params,
         receiver=receiver,
         amt=send_amount,
-        index=assetid
+        index=assetid,
+        note=note
     )
     
     signed_asset_tf = asset_tf.sign(sender_skey)
