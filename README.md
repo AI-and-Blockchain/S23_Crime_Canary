@@ -35,7 +35,10 @@ Creating Accounts
   python create_accounts.py
 ```
 
-## Story Chart
+First, a user needs to send and an amount as stake to the public address of a law enforcement. The transaction must have the image hash as the message. 
+Then they need to upload the image and submit it along with their public key via the web app. The web app will make the prediction using the pretrained model and show success/error message.
+
+## Sequence Diagram
 ![alt text](https://github.com/AI-and-Blockchain/S23_Crime_Canary/blob/main/images/components.png)
 
 ## Model
