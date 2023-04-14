@@ -8,6 +8,7 @@ from model import SiameseNetwork
 from werkzeug.utils import secure_filename
 from flask import Flask, request, redirect, url_for
 from model_utils import get_models, predict, resize_image
+from oracle_utils import call_app
 
 from algo_utils import (
     verify_transaction, hash_image, get_testnet_indexer, get_testnet_client, get_default_wallet, make_send_transaction
@@ -340,6 +341,9 @@ def upload_file():
                 flag = make_send_transaction(
                     CLIENT, DEFAULT_WALLET_PKEY, PKEY, DEFAULT_ASSET_ID, DEFAULT_WALLET_SKEY, tokens
                 )
+                app_id = 190577661
+                app_args = [b"notify_classification", intToBytes(apred), intToBytes(spred)]
+                call_app(CLIENT, DEFAULT_WALLET_PKEY, DEFAULT_WALLET_SKEY, app_id, app_args, [PKEY])
                 
                 if not(flag):
                     return redirect(url_for('invalid_transaction'))
