@@ -34,8 +34,8 @@ Creating Accounts
 ```
   python create_accounts.py
 ```
-
-##Alert Requirements
+--------
+## Alert Requirements
 
 Users need to first opt-in to the police wallet, where default wallet-id is 176869006 and the default police account is listed in accounts.csv.
 
