@@ -26,9 +26,9 @@ with open(f_object, 'r') as csv_file:
     police_private_key = csv_reader[1][3]
     police_public_key = csv_reader[1][2]
     participant_address = csv_reader[2][2]
-    participant_private_key = csv_reader[2][1]
+    participant_private_key = csv_reader[2][3]
     participant2_address = csv_reader[3][2]
-    participant2_private_key = csv_reader[3][1]
+    participant2_private_key = csv_reader[3][3]
 
 #Participant opt-in to application
 opt_in_app(algod_client, participant_address, participant_private_key, app_id)
