@@ -15,15 +15,19 @@ Hence, the overall goal is
 This is a research project and not an official product of any governmental entities. Expect bugs and sharp edges.
 
 ## Installation
+
+Make sure you have python3 environment set up. Run the following to install the necessary packages for this project.
+
 ```
   pip3 install -r requirements.txt
 ```
-and follow the installation of Algorand Sandbox (https://github.com/algorand/sandbox)
+Also, follow the installation instructions of Algorand Sandbox (https://github.com/algorand/sandbox)
 
 ## Usage
 ![alt text](https://github.com/AI-and-Blockchain/S23_Crime_Canary/blob/main/images/flow_chart.png)
 
 Launching Web App.
+Run the following from src to launch the web app.
 ```
   python web_app.py
 ```
