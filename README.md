@@ -67,9 +67,9 @@ Finally, the users utilized the web-app to finalize their report.
 
 2. Integrated discrete codes from different components to work together
 
-3. Web app can validate and resize an image. Then it can predict if there is an accident or not, and if there is an accident, the severity of it
+3. Web app can validate an image (of any size), where the size of the image is ensured to follow a default shape required by the model.
 
-4. 
+4. Users are rewarded based on severity of the predicted accident.
 
 ## Contributors
 Chibuikem Ezemaduka (ezemac@rpi.edu)
