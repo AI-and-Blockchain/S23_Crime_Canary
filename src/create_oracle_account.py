@@ -6,7 +6,7 @@ from algosdk import account, mnemonic
 OracleCreator = account.generate_account()
 orac_secret = mnemonic.from_private_key(OracleCreator[0])
 
-f_object = 'oracle_owner.csv'
+f_object = '../oracle_owner.csv'
 if not(os.path.exists(f_object)):
     with open(f_object, 'w', newline='') as f_object:
         writer = csv.writer(f_object)
