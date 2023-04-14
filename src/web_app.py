@@ -8,7 +8,7 @@ from model import SiameseNetwork
 from werkzeug.utils import secure_filename
 from flask import Flask, request, redirect, url_for
 from model_utils import get_models, predict, resize_image
-from oracle_utils import call_app
+from oracle_utils import call_app, intToBytes
 
 from algo_utils import (
     verify_transaction, hash_image, get_testnet_indexer, get_testnet_client, get_default_wallet, make_send_transaction
