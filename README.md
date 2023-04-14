@@ -21,7 +21,11 @@ Make sure you have python3 environment set up. Run the following to install the 
 ```
   pip3 install -r requirements.txt
 ```
-Also, follow the installation instructions of Algorand Sandbox (https://github.com/algorand/sandbox)
+Then, git clone the Algorand Sandbox (https://github.com/algorand/sandbox)
+```
+  cd sandbox
+  ./sandbox up testnet
+```
 
 ## Usage
 ![alt text](https://github.com/AI-and-Blockchain/S23_Crime_Canary/blob/main/images/flow_chart.png)
