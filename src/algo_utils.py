@@ -9,7 +9,13 @@ def decode_message(hash: str) -> str:
 
 
 def verify_transaction(img_hash: str, pkey: str, indexer: IndexerClient) -> bool:
-    response = indexer.search_transactions_by_address(address=pkey, txn_type="pay", note_prefix=str.encode(img_hash))
+    try:
+        response = indexer.search_transactions_by_address(address=pkey, txn_type="pay", note_prefix=str.encode(img_hash))
+    except:
+        return False 
+    else:
+        response = indexer.search_transactions_by_address(address=pkey, txn_type="pay", note_prefix=str.encode(img_hash))
+
     txn_hash = decode_message(response['transactions'][0]['note'])
     
     if img_hash == txn_hash:

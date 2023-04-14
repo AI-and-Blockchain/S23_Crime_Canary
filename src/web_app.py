@@ -9,7 +9,7 @@ from werkzeug.utils import secure_filename
 from flask import Flask, request, redirect, url_for
 from model_utils import get_models, predict, resize_image
 
-from S23_Crime_Canary.src.algo_utils import verify_transaction, hash_image, get_testnet_indexer, get_testnet_client
+from algo_utils import verify_transaction, hash_image, get_testnet_indexer, get_testnet_client
 
 INDEXER = get_testnet_indexer()
 CLIENT = get_testnet_client()
@@ -70,6 +70,17 @@ def invalid_submission():
             <center> <button onclick="history.back()">Go Back</button> <center>
         '''
         
+@app.route('/invalid_publickey')   
+def invalid_publickey():
+    return '''
+            <!doctype html>
+            <style>
+                p {text-align: center;} 
+            </style>
+            <p>You either sent an incorrect public key or you did not confirm your report.</p> <br>
+            <center> <button onclick="history.back()">Go Back</button> <center>
+        '''
+        
 @app.route('/submitted/<apred>-<spred>')
 def submitted(apred, spred):
     A, B = gen_response(int(apred), int(spred))
@@ -102,7 +113,7 @@ def upload_file():
             img_hash = hash_image(np.asarray(image))
             
             if not(verify_transaction(img_hash, PKEY, INDEXER)):
-                return redirect(url_for('bad_submission'))
+                return redirect(url_for('invalid_publickey'))
             
             img = resize_image(image)
             apred, spred = predict_fn(img)            
