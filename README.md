@@ -35,8 +35,12 @@ Creating Accounts
   python create_accounts.py
 ```
 
-First, a user needs to send and an amount as stake to the public address of a law enforcement. The transaction must have the image hash as the message. 
-Then they need to upload the image and submit it along with their public key via the web app. The web app will make the prediction using the pretrained model and show success/error message.
+Alert Requirements
+Users need to first opt-in to the police wallet, where default wallet-id is 176869006 and the default police account is listed in accounts.csv.
+
+Then, users need to send a stake (or a transaction) to the police wallet first, where the attached message is the hash of the image they are submitting.
+
+Finally, the users utilized the web-app to finalize their report.
 
 ## Sequence Diagram
 ![alt text](https://github.com/AI-and-Blockchain/S23_Crime_Canary/blob/main/images/components.png)
