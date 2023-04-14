@@ -10,8 +10,8 @@ def client_transaction(API_address, token):
     algod_clien = algod.AlgodClient(algod_token, algod_address, headers)
     return algod_clien
 
-f_object = 'accounts.csv'
-c_object = 'token.csv'
+f_object = '../accounts.csv'
+c_object = '../token.csv'
 
 #Retrieve Police public and private key
 with open(f_object, 'r') as csv_file:
