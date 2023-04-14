@@ -10,5 +10,9 @@ torchvision==0.14.1
 Pillow==9.4.0
 matplotlib==3.6.3
 matplotlib-inline==0.1.6
-torch==1.13.1
+torch>=2.0.0
+torchaudio==2.0.1
+torchvision==0.15.1
 scikit-learn==1.2.1
+json5==0.9.5 
+jsonschema==4.4.0
