@@ -5,7 +5,7 @@ import csv, os
 
 c_object = 'oracle_owner.csv'
 
-#Retrieve Oracle application ID
+#Retrieve Oracle owner details
 with open(c_object, 'r') as csv_file:
     csv_reader = list(csv.reader(csv_file))
     public_key = csv_reader[1][2]
