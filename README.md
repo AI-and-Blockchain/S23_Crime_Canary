@@ -34,8 +34,16 @@ Creating Accounts
 ```
   python create_accounts.py
 ```
+--------
+## Alert Requirements
 
-## Story Chart
+Users need to first opt-in to the police wallet, where default wallet-id is 176869006 and the default police account is listed in accounts.csv.
+
+Then, users need to send a stake (or a transaction) to the police wallet first, where the attached message is the hash of the image they are submitting.
+
+Finally, the users utilized the web-app to finalize their report.
+
+## Sequence Diagram
 ![alt text](https://github.com/AI-and-Blockchain/S23_Crime_Canary/blob/main/images/components.png)
 
 ## Model
@@ -59,9 +67,9 @@ Creating Accounts
 
 2. Integrated discrete codes from different components to work together
 
-3. Web app can validate and resize an image. Then it can predict if there is an accident or not, and if there is an accident, the severity of it
+3. Web app can validate an image (of any size), where the size of the image is ensured to follow a default shape required by the model.
 
-4. 
+4. Users are rewarded based on severity of the predicted accident.
 
 ## Contributors
 Chibuikem Ezemaduka (ezemac@rpi.edu)
