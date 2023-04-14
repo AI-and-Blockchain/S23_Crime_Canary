@@ -18,7 +18,7 @@ if not(os.path.exists(f_object)):
     print("Created application ID is: ", app_id)
 
     # Save the deployed application ID
-    with open('oracle_contract.csv', 'w', newline='') as csvfile:
+    with open('../oracle_contract.csv', 'w', newline='') as csvfile:
         my_writer = csv.writer(csvfile)
         my_writer.writerow(["APP_ID"])
         my_writer.writerow([app_id])
