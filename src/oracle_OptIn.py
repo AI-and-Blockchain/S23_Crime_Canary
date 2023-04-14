@@ -12,8 +12,8 @@ algod_token = "3UeCpd3CVz9lvWElfm0sr3zQzvP6FyOC136j7WvQ"
 headers = {"X-API-Key": algod_token, }
 algod_client = algod.AlgodClient(algod_token, algod_address, headers)
 
-f_object = 'accounts.csv'
-c_object = 'oracle_contract.csv'
+f_object = '../accounts.csv'
+c_object = '../oracle_contract.csv'
 
 #Retrieve Oracle application ID
 with open(c_object, 'r') as csv_file:
