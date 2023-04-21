@@ -34,7 +34,7 @@ if __name__ == "__main__":
         image.load()
         image = np.asarray(image)
         
-        print("OPTING IN TO ASSET {0}".format(DEFAULT_ASSET_ID))
+        print("OPTING IN TO ASSET {0} FOR {1}".format(DEFAULT_ASSET_ID, user_pkey))
         # OPT IN
         make_send_transaction(CLIENT, user_pkey, user_pkey, DEFAULT_ASSET_ID, user_skey, 0)    
         
@@ -43,3 +43,5 @@ if __name__ == "__main__":
         stake = transaction.PaymentTxn(user_pkey, CLIENT.suggested_params(), DEFAULT_WALLET_PKEY, amt=STAKE_FEE, note=hash_image(image).encode())
         signed_stake = stake.sign(user_skey)
         send_transaction(CLIENT, signed_stake)
+        
+        print("SENT IMAGE HASH: {0}".format(hash_image(image)))

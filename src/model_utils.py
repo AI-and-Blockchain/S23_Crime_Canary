@@ -17,7 +17,11 @@ transform = transforms.Compose([
 
 
 def resize_image(image: Image) -> torch.Tensor:
-    return transform(image)[:DEFAULT_SHAPE[0]].unsqueeze(0)
+    image = transform(image)[:DEFAULT_SHAPE[0]].unsqueeze(0)
+    
+    if image.size(1) != 3:
+        image = torch.cat([image for _ in range(3 - image.size(1) + 1)], dim=1)
+    return image
 
 
 def get_models(model_paths: List[str]) -> Iterable[Module]:
