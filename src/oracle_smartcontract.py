@@ -1,7 +1,6 @@
 from pyteal import *
 
-''' This is the oracle's smart contract. The ML web app sends a transaction to this smart contract to notify it that it has
-a classification result to send to the token payment contract'''
+''' This is the oracle's smart contract. It stores the prediction result of the ML Model on chain'''
 
 def approval_program():
     on_creation = Seq(              #The Seq command executes each command in order
